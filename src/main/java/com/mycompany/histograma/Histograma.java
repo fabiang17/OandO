@@ -14,6 +14,7 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
@@ -51,6 +52,7 @@ public class Histograma extends JPanel implements Observer {
             xi+=5;
             i++;
             
+            g.drawString(Arrays.toString(c.getX()), 50, 350);
         }
     }
     
@@ -99,6 +101,9 @@ public class Histograma extends JPanel implements Observer {
             @Override
             public void run() {
                    c.ordenarBurbuja();
+//                   JTextField text;
+//                text = new JTextField(Arrays.toString(c.getX()));
+//                   f.add(text);
             }
         });
         
@@ -109,6 +114,15 @@ public class Histograma extends JPanel implements Observer {
                    c.ordenarQuickSort();
             }
         });
+        
+         final Thread ordenSort=new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                   c.ordenamientoSort();
+            }
+        });
+        
         //Listener Button1
         button1.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
@@ -127,7 +141,7 @@ public class Histograma extends JPanel implements Observer {
         //Listener Button3
         button3.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-             
+             ordenSort.start();
          }          
         }); 
         

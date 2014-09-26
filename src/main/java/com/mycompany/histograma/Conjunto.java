@@ -52,7 +52,7 @@ public class Conjunto extends Observable{
       
     }
     
-     public  void quick_srt(int array[],int low, int n){
+    public  void quick_srt(int array[],int low, int n){
       Boolean b=true;
       int lo = low;
       int hi = n;
@@ -100,7 +100,31 @@ public class Conjunto extends Observable{
       quick_srt(array, lo == low ? lo+1 : lo, n);
    }
 
-
+    public void ordenamientoSort()
+    {
+        Boolean b=true;
+        int i, j, newValue;
+            for (i = 1; i < x.length; i++) {
+                newValue = x[i];
+                j = i;
+                while (j > 0 && x[j - 1] > newValue) {
+                    x[j] = x[j - 1];
+                    j--;
+                    this.setChanged();
+                    this.notifyObservers(x[j]);
+                }
+                 synchronized(b){
+                    try {
+                        b.wait(5);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Conjunto.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            x[j] = newValue;
+      }
+        
+    }
+    
     int[] getX() {
         return x;
     }
