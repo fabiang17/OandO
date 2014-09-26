@@ -103,25 +103,35 @@ public class Conjunto extends Observable{
     public void ordenamientoSort()
     {
         Boolean b=true;
-        int i, j, newValue;
-            for (i = 1; i < x.length; i++) {
-                newValue = x[i];
-                j = i;
-                while (j > 0 && x[j - 1] > newValue) {
-                    x[j] = x[j - 1];
-                    j--;
-                    this.setChanged();
-                    this.notifyObservers(x[j]);
-                }
-                 synchronized(b){
+        int increment = x.length / 2;
+	while (increment > 0) {
+		for (int i = increment; i < x.length; i++) {
+			int j = i;
+			int temp = x[i];
+			while (j >= increment && x[j - increment] > temp) {
+				x[j] = x[j - increment];
+				j = j - increment;
+                                this.setChanged();
+                                this.notifyObservers(temp);
+			}
+			x[j] = temp;
+                         
+		}
+		if (increment == 2) {
+			increment = 1;
+		} else {
+			increment *= (5.0 / 11);
+		}
+	}
+        
+        synchronized(b){
                     try {
                         b.wait(5);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Conjunto.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-            x[j] = newValue;
-      }
+      
         
     }
     
