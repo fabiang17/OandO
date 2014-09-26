@@ -6,10 +6,10 @@
 
 package com.mycompany.histograma;
 
-/**
- *
- * @author f212
- */
-public class ButtonHandler {
-    
+import java.awt.event.ActionEvent;
+
+
+
+public interface ActionListenerCommand {
+    public void Execute();
 }
