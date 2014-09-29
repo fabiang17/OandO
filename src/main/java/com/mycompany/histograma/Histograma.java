@@ -5,6 +5,7 @@
  */
 package com.mycompany.histograma;
 
+import static com.mycompany.histograma.Histograma.bubble;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;

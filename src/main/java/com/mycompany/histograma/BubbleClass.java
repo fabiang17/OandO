@@ -17,7 +17,7 @@ import org.codehaus.groovy.tools.shell.Command;
  *
  * @author f212
  */
-public class BubbleClass implements ActionListenerCommand{
+public class BubbleClass extends Observable implements ActionListenerCommand {
     public int x[];
 
     BubbleClass(int[] x) {
@@ -36,7 +36,9 @@ public class BubbleClass implements ActionListenerCommand{
                 if(this.x[i]>this.x[j]){
                     int tmp=this.x[i];
                     this.x[i]=this.x[j];
-                    this.x[j]=tmp;                    
+                    this.x[j]=tmp;     
+                    this.setChanged();
+                    this.notifyObservers(tmp);
                 }
                 synchronized(b){
                     try {

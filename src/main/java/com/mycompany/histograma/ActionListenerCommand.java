@@ -7,9 +7,10 @@
 package com.mycompany.histograma;
 
 import java.awt.event.ActionEvent;
+import java.util.Observable;
 
 
 
-public interface ActionListenerCommand {
-     void Execute();
+public interface ActionListenerCommand{
+      void Execute();
 }
