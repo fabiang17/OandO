@@ -17,24 +17,26 @@ import org.codehaus.groovy.tools.shell.Command;
  *
  * @author f212
  */
-public class BubbleClass extends Observable,JButton implements ActionListenerCommand{
+public class BubbleClass implements ActionListenerCommand{
     public int x[];
-    public void BubbleClass(int y[])
+
+    BubbleClass(int[] x) {
+        this.x = x;
+    }
+    public void BubbleClass(int x[])
     {
-        this.x = y;
+        this.x = x;
     }
     
     @Override
     public void Execute() {
         Boolean b=true;
-        for (int i = 0; i < x.length; i++) {
-            for (int j = i+1; j < x.length; j++) {
-                if(x[i]>x[j]){
-                    int tmp=x[i];
-                    x[i]=x[j];
-                    x[j]=tmp;                    
-                    this.setChanged();
-                    this.notifyObservers(tmp);
+        for (int i = 0; i < this.x.length; i++) {
+            for (int j = i+1; j < this.x.length; j++) {
+                if(this.x[i]>this.x[j]){
+                    int tmp=this.x[i];
+                    this.x[i]=this.x[j];
+                    this.x[j]=tmp;                    
                 }
                 synchronized(b){
                     try {

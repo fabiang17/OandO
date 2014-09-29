@@ -24,30 +24,21 @@ public class Conjunto extends Observable{
         for (int i = 0; i < x.length; i++) {
             x[i]=r.nextInt(200);            
         }
-  
     }
     
-    public void ordenarBurbuja(){
-        BubbleClass burbuja = new BubbleClass();
-        buCommand.Execute();
-    }
-    
-    public void ordenarQuickSort(){
-        
-      
-    }
-    
-    
-
-    public void ordenamientoSort()
+    public void setCommand(ActionListenerCommand command)
     {
-       
-      
-        
+        this.buCommand = command;
+    }
+    
+    public void Ordenar()
+    {
+       buCommand.Execute();
+       this.setChanged();
+       this.notifyObservers(this.x);
     }
     
     int[] getX() {
         return x;
     }
-    
 }

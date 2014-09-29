@@ -11,5 +11,5 @@ import java.awt.event.ActionEvent;
 
 
 public interface ActionListenerCommand {
-    public void Execute();
+     void Execute();
 }

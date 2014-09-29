@@ -14,29 +14,31 @@ import java.util.logging.Logger;
  *
  * @author lgutierrez
  */
-public class ShellClass extends Observable implements ActionListenerCommand{
+public class ShellClass implements ActionListenerCommand{
     public int x[];
+
+    ShellClass(int[] x) {
+        this.x = x;
+    }
     
-    public void ShellClass(int y[])
+    public void ShellClass(int x[])
     {
-        this.x = y;
+        this.x = x;
     }
 
     @Override
     public void Execute() {
          Boolean b=true;
-        int increment = x.length / 2;
+        int increment = this.x.length / 2;
 	while (increment > 0) {
-		for (int i = increment; i < x.length; i++) {
+		for (int i = increment; i < this.x.length; i++) {
 			int j = i;
-			int temp = x[i];
-			while (j >= increment && x[j - increment] > temp) {
-				x[j] = x[j - increment];
+			int temp = this.x[i];
+			while (j >= increment && this.x[j - increment] > temp) {
+				this.x[j] = this.x[j - increment];
 				j = j - increment;
-                                this.setChanged();
-                                this.notifyObservers(temp);
 			}
-			x[j] = temp;
+			this.x[j] = temp;
                          
 		}
 		if (increment == 2) {

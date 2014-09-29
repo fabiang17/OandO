@@ -29,7 +29,12 @@ import javax.swing.JPanel;
  */
 public class Histograma extends JPanel implements Observer {
     private static Object frame;
-    Conjunto c;
+    static Conjunto c;
+    
+    //Command
+    static ActionListenerCommand bubble;
+    static ActionListenerCommand shell;
+    static ActionListenerCommand Sort;
     public Histograma(Conjunto c) {
         this.c=c;
         this.setSize(new Dimension(600,600));
@@ -79,7 +84,11 @@ public class Histograma extends JPanel implements Observer {
         JButton  button3 = new JButton ("Organizar por ShowSort");
         //ButtonHandler
         buttonHandler vf = new buttonHandler();
-        System.out.println(intQuantity);
+        //Command Class
+        bubble = new BubbleClass(c.getX());
+        shell = new ShellClass(c.getX());
+        Sort = new SortClass(c.getX());
+        
         f.add(contentCenter,BorderLayout.SOUTH);
         contentCenter.add(button1);
         contentCenter.add(button2);
@@ -96,7 +105,7 @@ public class Histograma extends JPanel implements Observer {
         
         t.start();
         
-        final Thread orden=new Thread(new Runnable() {
+        /*final Thread orden=new Thread(new Runnable() {
 
             @Override
             public void run() {
@@ -105,23 +114,8 @@ public class Histograma extends JPanel implements Observer {
 //                text = new JTextField(Arrays.toString(c.getX()));
 //                   f.add(text);
             }
-        });
+        });*/
         
-        final Thread ordenQuick=new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                   c.ordenarQuickSort();
-            }
-        });
-        
-         final Thread ordenSort=new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                   c.ordenamientoSort();
-            }
-        });
         
          button1.addActionListener(vf);
          button2.addActionListener(vf);
@@ -157,8 +151,10 @@ public class Histograma extends JPanel implements Observer {
     
     public static class buttonHandler implements ActionListener {
     public void actionPerformed(ActionEvent e) {
-      ActionListenerCommand CommandObj = (ActionListenerCommand) e.getSource();
-      CommandObj.Execute();
+      //ActionListenerCommand CommandObj = (ActionListenerCommand) e.getSource();
+        c.setCommand(bubble);
+        c.Ordenar();
+        
     }
   }
 }

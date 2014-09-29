@@ -14,18 +14,22 @@ import java.util.logging.Logger;
  *
  * @author lgutierrez
  */
-public class SortClass extends Observable implements ActionListenerCommand{
+public class SortClass implements ActionListenerCommand{
     
     public int x[];
+
+    SortClass(int[] x) {
+        this.x = x;
+    }
     
-    public void SortClass(int y[])
+    public void SortClass(int x[])
     {
-        this.x = y;
+        this.x = x;
     }
    
     @Override
     public void Execute() {
-        quick_srt(x,0,x.length-1);
+        quick_srt(this.x,0,this.x.length-1);
     }
     
     public  void quick_srt(int array[],int low, int n){
@@ -47,8 +51,6 @@ public class SortClass extends Observable implements ActionListenerCommand{
               int T = array[lo];
               array[lo] = array[hi];
               array[hi] = T;
-              this.setChanged();
-              this.notifyObservers(T);
           }
           synchronized(b){
                     try {
@@ -62,8 +64,6 @@ public class SortClass extends Observable implements ActionListenerCommand{
           int T = hi;
           hi = lo;
           lo = T;
-          this.setChanged();
-          this.notifyObservers(T);
       }
       synchronized(b){
                     try {
